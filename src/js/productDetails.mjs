@@ -17,7 +17,6 @@ export function addToCart(){
 }
 
 export function renderProductDetails(){
-    console.log(product);
     document.getElementById("productName").textContent = product.Name;
     document.getElementById("productNameWithoutBrand").textContent = product.NameWithoutBrand;
     document.getElementById("productImage").src = product.Image;
