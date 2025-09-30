@@ -7,6 +7,10 @@ let product;
 export default async function productDetails(productId){
     product = await findProductById(productId);
     renderProductDetails();
+    document
+    .getElementById("addToCart")
+    .addEventListener("click", addToCart);
+
 }
 
 export function addToCart(){
@@ -23,4 +27,5 @@ export function renderProductDetails(){
     document.getElementById("productFinalPrice").textContent = `$${product.FinalPrice}`;
     document.getElementById("productColorName").textContent = product.Colors[0].ColorName;
     document.getElementById("productDescriptionHtmlSimple").innerHTML = product.DescriptionHtmlSimple;
+    document.getElementById("addToCart").dataset.id = product.Id;
 }
