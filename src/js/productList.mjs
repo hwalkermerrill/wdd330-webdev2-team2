@@ -1,6 +1,8 @@
 import { getData } from "./productData.mjs";
 import { renderListWithTemplate } from "./utils.mjs";
+import { updateCartBadge } from "./cartBadge.js";
 
+document.addEventListener("DOMContentLoaded", updateCartBadge);
 function productCardTemplate(product) {
     return `<li class="product-card">
     <a href="product_pages/index.html?product=">
