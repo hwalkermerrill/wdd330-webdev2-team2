@@ -1,6 +1,9 @@
 import { setLocalStorage } from "./utils.mjs";
 import { getLocalStorage } from "./utils.mjs";
 import { findProductById } from "./productData.mjs";
+import { updateCartBadge } from "./cartBadge.js";
+
+document.addEventListener("DOMContentLoaded", updateCartBadge);
 
 let product;
 
