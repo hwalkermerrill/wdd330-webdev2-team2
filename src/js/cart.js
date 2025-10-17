@@ -21,7 +21,7 @@ function renderCartContents() {
     document.querySelector(".cart-total").classList.add("hide");
   }
 }
-function setTotalNumber(){
+export function setTotalNumber(){
   const cartItems = getLocalStorage("so-cart");
   if (cartItems && cartItems.length > 0) {
     cartNumber = cartItems.length;
@@ -48,5 +48,5 @@ function cartItemTemplate(item) {
   return newItem;
 }
 
-setTotalNumber();
+
 renderCartContents();

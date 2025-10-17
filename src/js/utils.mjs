@@ -74,11 +74,13 @@ function loadTemplate(path) {
 } 
 
 
-export function loadHeaderFooter(){
-  const headerTemplateFn = loadTemplate("/partials/header.html");
-  const footerTemplateFn = loadTemplate("/partials/footer.html");
-
-  renderWithTemplate(headerTemplateFn, qs("header"));
-  renderWithTemplate(footerTemplateFn , qs("footer"));
-  console.log("header and footer loaded");
+export async function loadHeaderFooter(){
+  const headerTemplateFn = loadTemplate("/partials/header.html"); 
+  const footerTemplateFn = loadTemplate("/partials/footer.html"); 
+  const headerHTML = await headerTemplateFn(); 
+  const footerHTML = await footerTemplateFn(); 
+  const headerEl = document.querySelector("#main-header"); 
+  const footerEl = document.querySelector("#main-footer");
+   renderWithTemplate(() => headerHTML, headerEl); 
+   renderWithTemplate(() => footerHTML, footerEl);
 }
