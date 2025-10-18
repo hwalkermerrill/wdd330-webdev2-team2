@@ -2,6 +2,7 @@ import { findProductById } from "./productData.mjs";
 import { getParam } from "./utils.mjs";
 import productDetails from "./productDetails.mjs"; 
 import { updateCartBadge } from "./cartBadge.js";
+import { setTotalNumber } from "./cart.js";
 
 document.addEventListener("DOMContentLoaded", updateCartBadge);
 const productId = getParam("product");
@@ -15,6 +16,6 @@ async function addToCartHandler(e) {
   addProductToCart(product);
 }
 
-setTotalNumber();
+// setTotalNumber();
 
 // add listener to Add to Cart button
