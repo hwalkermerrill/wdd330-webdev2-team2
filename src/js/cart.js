@@ -9,6 +9,7 @@ function renderCartContents() {
     cartItems.forEach(item =>{
       totalCost += item.FinalPrice;
       cartNumber++;
+      // eslint-disable-next-line no-console
       console.log(cartNumber);
     })
   }

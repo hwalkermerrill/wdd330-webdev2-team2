@@ -1,11 +1,9 @@
-
 import { loadHeaderFooter } from "./utils.mjs";
 import productList from "./productList.mjs";
-console.log("main.mjs loaded ✅");
+import { loadAlerts } from "./alert.mjs";
 
-
-
-loadHeaderFooter();
-productList("./product-list", "tents");
-
-// this is a different test change for Allisons help
+document.addEventListener("DOMContentLoaded", () => {
+  loadHeaderFooter();
+  loadAlerts(); //load the allert banner
+  productList(".product-list", "tents");
+});
