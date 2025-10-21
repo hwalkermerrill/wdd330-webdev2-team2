@@ -47,6 +47,42 @@ header {
   text-decoration: none;
   color: var(--font-body);
 }
+/* === Search Form Styles === */
+.search-form {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: auto;
+}
+
+.search-form input[type="text"] {
+  padding: 0.5rem 0.75rem;
+  border: 2px solid var(--accent, #4CAF50);
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.search-form input[type="text"]:focus {
+  border-color: var(--highlight, #3e8e41);
+  box-shadow: 0 0 4px rgba(60, 179, 113, 0.3);
+}
+
+.search-form button {
+  padding: 0.5rem 1rem;
+  border: none;
+  background-color: var(--highlight, #4CAF50);
+  color: white;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.search-form button:hover {
+  background-color: var(--highlight-dark, #3e8e41);
+}
 .hero {
   position: relative;
 }
