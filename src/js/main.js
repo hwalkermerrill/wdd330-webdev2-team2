@@ -1,14 +1,22 @@
 import { loadHeaderFooter } from "./utils.mjs";
-import productList from "./productList.mjs";
 import { loadAlerts } from "./alert.mjs";
+import productList from "./productList.mjs";
 
-document.addEventListener("DOMContentLoaded", () => {
-  loadHeaderFooter();
-  loadAlerts(); //load the allert banner
-  productList(".product-list", "tents");
+document.addEventListener("DOMContentLoaded", async () => {
+  // Load shared site elements
+  await loadHeaderFooter();
+  await loadAlerts();
+
+  // Determine what page we're on
+  const path = window.location.pathname;
+
+  // ✅ If we're on the product list page, load tents
+  if (path.includes("product-list")) {
+    productList(".product-list", "tents");
+  }
 });
 
-// Attach search event listener once header is loaded
+// ✅ Attach search event listener after header loads
 document.addEventListener("DOMContentLoaded", () => {
   const header = document.getElementById("main-header");
 
@@ -23,6 +31,9 @@ document.addEventListener("DOMContentLoaded", () => {
         if (query) {
           // Redirect to product list page with search query
           window.location.href = `/product-list/index.html?search=${encodeURIComponent(query)}`;
+        } else {
+          // If empty search, just go to product list page
+          window.location.href = `/product-list/index.html`;
         }
       });
     }

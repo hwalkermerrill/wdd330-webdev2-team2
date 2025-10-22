@@ -268,6 +268,59 @@ footer {
   padding: 1em;
 }
 
+/* === Category Grid Styling === */
+.category-grid {
+  text-align: center;
+  margin: 3rem auto;
+  padding: 1rem;
+}
+
+.category-grid h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  color: var(--primary-color);
+}
+
+.categories {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 2rem;
+  justify-items: center;
+  align-items: start;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.category-card {
+  background-color: #fff;
+  border-radius: 1rem;
+  padding: 1.5rem 1rem;
+  text-decoration: none;
+  color: inherit;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  width: 100%;
+  max-width: 200px;
+}
+
+.category-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.category-card img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  margin-bottom: 1rem;
+}
+
+.category-card h3 {
+  font-size: 1.1rem;
+  margin: 0;
+  color: var(--dark-grey);
+}
+
 .hide {
   display: none;
 }
