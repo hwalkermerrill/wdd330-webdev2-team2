@@ -25,13 +25,21 @@ export default async function productDetails(productId) {
     console.error("Error loading product details:", error);
   }
 }
-
+function cartAnimation() {
+  document.querySelector(".cart").classList.add("animate");
+  setTimeout(() => {
+    document.querySelector(".cart").classList.remove("animate");
+  }, 1000);
+}
 export function addToCart() {
   let cart = getLocalStorage("so-cart") || [];
   cart.push(product);
   setLocalStorage("so-cart", cart);
   updateCartBadge();
+  cartAnimation();
+
 }
+
 
 export function renderProductDetails() {
   // Use correct API image structure
