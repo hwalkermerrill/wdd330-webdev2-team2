@@ -1,9 +1,35 @@
-import { getLocalStorage } from "./utils.mjs";
+import { getLocalStorage, setLocalStorage } from "./utils.mjs";
 
-let totalCost = 0;
-let cartNumber =0
+
+
+function removeFromCart(id) {
+   const cart = getLocalStorage("so-cart") || [];
+  // Find the index of the first item with this Id
+  const index = cart.findIndex(item => String(item.Id) === String(id));
+  if (index > -1) {
+    cart.splice(index, 1); // remove that one item
+  }
+  setLocalStorage("so-cart", cart);
+  renderCartContents();
+
+  location.reload();
+}
+
+function removeFromCartButton(){
+  document.querySelectorAll(".removeFromCart").forEach(btn => console.log(btn.dataset.id));
+  document.querySelectorAll(".removeFromCart").forEach(button => {
+    button.addEventListener("click", (e) => {
+      console.log("button hit");
+      const id = e.target.getAttribute('data-id');
+      removeFromCart(id);
+    });
+  })
+}
 
 function renderCartContents() {
+  let totalCost = 0;
+  let cartNumber = 0;
+
   const cartItems = getLocalStorage("so-cart");
   if (cartItems && cartItems.length > 0) {
     cartItems.forEach(item =>{
@@ -44,6 +70,8 @@ function cartItemTemplate(item) {
   <p class="cart-card__color">${item.Colors[0].ColorName}</p>
   <p class="cart-card__quantity">qty: 1</p>
   <p class="cart-card__price">$${item.FinalPrice}</p>
+  <button class="removeFromCart" data-id="${item.Id}">x</button>
+
 </li>`;
 
   return newItem;
@@ -51,3 +79,4 @@ function cartItemTemplate(item) {
 
 
 renderCartContents();
+removeFromCartButton();
