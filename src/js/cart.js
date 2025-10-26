@@ -15,6 +15,19 @@ function removeFromCart(id) {
   location.reload();
 }
 
+function combineCartItems(cart) {
+  const combined = [];
+  cart.forEach(item => {
+    const existing = combined.find(i => i.Id === item.Id);
+    if (existing) {
+      existing.quantity = (existing.quantity || 1) + 1;
+    } else {
+      combined.push({ ...item, quantity: item.quantity || 1 });
+    }
+  });
+  return combined;
+}
+
 function removeFromCartButton(){
   document.querySelectorAll(".removeFromCart").forEach(btn => console.log(btn.dataset.id));
   document.querySelectorAll(".removeFromCart").forEach(button => {
@@ -22,6 +35,7 @@ function removeFromCartButton(){
       console.log("button hit");
       const id = e.target.getAttribute('data-id');
       removeFromCart(id);
+      increaseQuantity(id);
     });
   })
 }
@@ -55,6 +69,59 @@ export function setTotalNumber(){
     document.querySelector(".cart-badge").textContent = cartNumber;
   }
 }
+const addQuantity = document.querySelectorAll(".increaseQty");
+const removeQuantity = document.querySelectorAll(".decreaseQty");
+function increaseQuantity(id) {
+const item = cart.find(p => String(p.Id) === id);
+    if (item) item.quantity += 1;
+    setLocalStorage("so-cart", cart);
+    renderCartContents();
+    addQuantity.forEach(button => {
+      button.addEventListener("click", (e) => {
+        const id = e.target.getAttribute('data-id');
+        increaseQuantity(id);
+      });
+    })
+};
+
+function decreaseQuantity(id) {
+  const item = cart.find(p => String(p.Id) === id);
+  if (item) item.quantity -= 1;
+  setLocalStorage("so-cart", cart);
+  renderCartContents();
+};
+
+document.querySelector(".product-list").addEventListener("click", e => {
+  const id = e.target.dataset.id;
+  let cart = getLocalStorage("so-cart") || []; // <-- define cart first!
+
+  if (e.target.classList.contains("increaseQty")) {
+    const item = cart.find(p => String(p.Id) === id);
+    if (item) item.quantity = (item.quantity || 1) + 1;
+    setLocalStorage("so-cart", cart);
+    renderCartContents();
+  }
+
+  if (e.target.classList.contains("decreaseQty")) {
+    const item = cart.find(p => String(p.Id) === id);
+    if (item) {
+      item.quantity = (item.quantity || 1) - 1;
+      if (item.quantity <= 0) {
+        cart = cart.filter(p => String(p.Id) !== id);
+      }
+    }
+    setLocalStorage("so-cart", cart);
+    renderCartContents();
+  }
+
+  if (e.target.classList.contains("removeFromCart")) {
+    cart = cart.filter(p => String(p.Id) !== id);
+    setLocalStorage("so-cart", cart);
+    renderCartContents();
+  }
+});
+
+ 
 
 function cartItemTemplate(item) {
   const newItem = `<li class="cart-card divider">
@@ -68,7 +135,12 @@ function cartItemTemplate(item) {
     <h2 class="card__name">${item.Name}</h2>
   </a>
   <p class="cart-card__color">${item.Colors[0].ColorName}</p>
-  <p class="cart-card__quantity">qty: 1</p>
+  <div class="cart-card__quantity-controls">
+        <p class="cart-card__quantity">qty: ${item.quantity}</p>
+        <button class="decreaseQty" data-id="${item.Id}">-</button>
+        <button class="increaseQty" data-id="${item.Id}">+</button>
+      </div>
+  
   <p class="cart-card__price">$${item.FinalPrice}</p>
   <button class="removeFromCart" data-id="${item.Id}">x</button>
 
