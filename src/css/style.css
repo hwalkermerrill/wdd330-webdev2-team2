@@ -47,6 +47,42 @@ header {
   text-decoration: none;
   color: var(--font-body);
 }
+/* === Search Form Styles === */
+.search-form {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: auto;
+}
+
+.search-form input[type="text"] {
+  padding: 0.5rem 0.75rem;
+  border: 2px solid var(--accent, #4CAF50);
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.search-form input[type="text"]:focus {
+  border-color: var(--highlight, #3e8e41);
+  box-shadow: 0 0 4px rgba(60, 179, 113, 0.3);
+}
+
+.search-form button {
+  padding: 0.5rem 1rem;
+  border: none;
+  background-color: var(--highlight, #4CAF50);
+  color: white;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.search-form button:hover {
+  background-color: var(--highlight-dark, #3e8e41);
+}
 .hero {
   position: relative;
 }
@@ -212,6 +248,12 @@ button {
   grid-row: 2;
   grid-column: 3;
 }
+.cart.animate svg {
+  transform: scale(1.1);
+  transition: transform 0.1s ease-in-out;
+
+  fill: var(--primary-color);
+}
 
 @media screen and (min-width: 500px) {
   body {
@@ -230,6 +272,59 @@ button {
 footer {
   font-size: var(--small-font);
   padding: 1em;
+}
+
+/* === Category Grid Styling === */
+.category-grid {
+  text-align: center;
+  margin: 3rem auto;
+  padding: 1rem;
+}
+
+.category-grid h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  color: var(--primary-color);
+}
+
+.categories {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 2rem;
+  justify-items: center;
+  align-items: start;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.category-card {
+  background-color: #fff;
+  border-radius: 1rem;
+  padding: 1.5rem 1rem;
+  text-decoration: none;
+  color: inherit;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  width: 100%;
+  max-width: 200px;
+}
+
+.category-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.category-card img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  margin-bottom: 1rem;
+}
+
+.category-card h3 {
+  font-size: 1.1rem;
+  margin: 0;
+  color: var(--dark-grey);
 }
 
 .hide {

@@ -1,5 +1,8 @@
-import { resolve } from "path";
+import { fileURLToPath } from "url";
+import { resolve, dirname } from "path";
 import { defineConfig } from "vite";
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
   root: "src/",
@@ -12,6 +15,7 @@ export default defineConfig({
         product: resolve(__dirname, "src/product_pages/index.html"),
         cart: resolve(__dirname, "src/cart/index.html"),
         checkout: resolve(__dirname, "src/checkout/index.html"),
+        productList: resolve(__dirname, "src/product-list/index.html"), // ✅ your new page
       },
     },
   },

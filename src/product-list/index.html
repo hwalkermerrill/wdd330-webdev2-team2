@@ -3,42 +3,25 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sleep Outside | Home</title>
-    <link rel="stylesheet" href="/css/style.css" />
+    <title>Sleep Outside | Product List</title>
+    <link rel="stylesheet" href="../css/style.css" />
   </head>
 
   <body>
     <header id="main-header"></header>
 
     <main class="divider">
-      <!-- Hero Section -->
-      <div class="hero">
-        <img
-          src="/images/banner-sm.jpg"
-          srcset="/images/banner-sm.jpg 500w, /images/banner.jpg"
-          alt="image of a high mountain lake"
-        />
-        <div class="logo logo--square">
-          <img src="/images/noun_Tent_2517.svg" alt="tent image for logo" />
-          <div>Sleep<span class="highlight">Outside</span></div>
-        </div>
-      </div>
-
-      <!-- Mission Section -->
-      <section class="mission">
-        <p>We spend too much time these days indoors...sitting usually.</p>
-        <p>No wonder we are a mess!</p>
-        <p>
-          What we really need is to get outside...in fact SLEEP outside. Our
-          mission is to provide you with everything you need to do this
-          comfortably at an affordable price.
-        </p>
+      <!-- Product Section -->
+      <section class="products">
+        <h2 id="page-title">Top Products</h2>
+        <div id="product-list" class="product-list"></div>
       </section>
 
       <!-- Category Grid Section -->
       <section class="category-grid">
         <h2>Shop by Category</h2>
         <div class="categories">
+          <!-- Tents -->
           <a href="/product-list/index.html?category=tents" class="category-card">
             <img
               src="https://byui-cit.github.io/wdd330/images/category-icons/noun_Tent_3544767.svg"
@@ -47,6 +30,7 @@
             <h3>Tents</h3>
           </a>
 
+          <!-- Sleeping Bags -->
           <a href="/product-list/index.html?category=sleeping-bags" class="category-card">
             <img
               src="https://byui-cit.github.io/wdd330/images/category-icons/noun_Sleeping%20Bag_3544775.svg"
@@ -55,6 +39,7 @@
             <h3>Sleeping Bags</h3>
           </a>
 
+          <!-- Backpacks -->
           <a href="/product-list/index.html?category=backpacks" class="category-card">
             <img
               src="https://byui-cit.github.io/wdd330/images/category-icons/noun_carrier%20bag_3544771.svg"
@@ -63,6 +48,7 @@
             <h3>Backpacks</h3>
           </a>
 
+          <!-- Hammocks -->
           <a href="/product-list/index.html?category=hammocks" class="category-card">
             <img
               src="https://byui-cit.github.io/wdd330/images/category-icons/noun_Hammock_791143.svg"
@@ -75,6 +61,7 @@
     </main>
 
     <footer id="main-footer"></footer>
-    <script src="/js/main.js" type="module"></script>
+
+    <script type="module" src="../js/product-list.js"></script>
   </body>
 </html>
