@@ -1,5 +1,5 @@
 import { getLocalStorage, setLocalStorage } from "./utils.mjs";
-import { loadHeaderFooter } from "./utils.mjs";
+import { loadHeaderFooter, getCartTotal } from "./utils.mjs";
 
 
 
@@ -41,21 +41,17 @@ function removeFromCartButton(){
   })
 }
 
+
 export function renderCartContents() {
-  let totalCost = 0;
+  let totalCost = getCartTotal();
   let cartNumber = 0;
 
   const cartItems = getLocalStorage("so-cart");
   if (cartItems && cartItems.length > 0) {
-    console.log(cartItems);
     cartItems.forEach(item =>{
-      totalCost += item.FinalPrice;
       cartNumber++;
-      // eslint-disable-next-line no-console
-      console.log(cartNumber);
     })
     const htmlItems = cartItems.map((item) => cartItemTemplate(item));
-    console.log(htmlItems.join(""));
     document.querySelector(".product-list").innerHTML = htmlItems.join("");
     document.getElementById("total-price").textContent = `$${totalCost.toFixed(2)}`;
   } else {

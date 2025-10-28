@@ -1,4 +1,4 @@
-import { getData } from "./productData.mjs";
+import { getProductsByCategory } from "./externalServices.mjs";
 import { renderListWithTemplate } from "./utils.mjs";
 
 const params = new URLSearchParams(window.location.search);
@@ -24,7 +24,7 @@ function productCardTemplate(product) {
 
 export default async function productList(selector, category) {
   const el = document.querySelector(selector);
-  let products = await getData(category);
+  let products = await getProductsByCategory(category);
 
   // If a search query exists, filter results
   if (searchQuery) {

@@ -8,7 +8,8 @@
 
     <title>Sleep Outside | Checkout</title>
 
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <script src="../js/checkoutProcess.mjs" type="module" defer></script>
   </head>
 
   <body>
@@ -17,6 +18,41 @@
     <main class="divider">
       <section class="products">
         <h2>Review & Place your Order</h2>
+        <form>
+          <fieldset name="shipping">
+            <legend for="shipping">Shipping</legend>
+            <label for="first_name">First Name</label>
+            <input type="text" id="first_name" name="first_name" required />
+            <label for="last_name">Last Name</label>
+            <input type="text" id="last_name" name="last_name" required />
+            <label for="street">Street</label>
+            <input type="text" id="street" name="street" required />
+            <label for="city">City</label>
+            <input type="text" id="city" name="city" required />
+            <label for="state">State</label>
+            <input type="text" id="state" name="state" required />
+            <label for="zip">Zip Code</label>
+            <input type="text" id="zip" name="zip" required />
+          </fieldset>
+          <fieldset name="payment">
+            <legend for="payment">Payment</legend>
+            <label for="card_number">Card Number</label>
+            <input type="text" id="card_number" name="card_number" required />
+            <label for="expiration">Expiration</label>
+            <input type="text" id="expiration" name="expiration" required />
+            <label for="security_code">Security Code</label>
+            <input type="text" id="security_code" name="security_code" required />
+          </fieldset>
+          <fieldset name="order-summary">
+            <legend for="shipping">Order Summary</legend>
+            Item Subtotal(<span id="item-count">0</span>): <span id="subtotal-amount">$0.00</span><br />
+            Shipping Estimate: <span id="shipping-amount">$5.00</span><br />
+            Tax: <span id="tax-amount">$0.00</span><br />
+            <b>Order Total: <span id="order-total-amount">$0.00</span></b>
+
+          </fieldset>
+          <button id="submit-order">Checkout</button>
+        </form>
       </section>
     </main>
 

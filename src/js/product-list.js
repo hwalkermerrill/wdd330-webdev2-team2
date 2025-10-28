@@ -1,5 +1,11 @@
 import productList from "./productList.mjs";
 import { getParam } from "./utils.mjs";
+import { loadHeaderFooter } from "./utils.mjs";
+
+// Load shared header and footer
+document.addEventListener("DOMContentLoaded", async () => {
+  await loadHeaderFooter();
+});
 
 // Get the category parameter from the URL (default to tents)
 const category = getParam("category") || "tents";

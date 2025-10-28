@@ -83,3 +83,25 @@ export async function loadHeaderFooter(){
    renderWithTemplate(() => headerHTML, headerEl); 
    renderWithTemplate(() => footerHTML, footerEl);
 }
+
+export function getCartTotal() {
+  let totalCost = 0;
+  const cartItems = getLocalStorage("so-cart") || [];
+  if (cartItems && cartItems.length > 0) {
+    cartItems.forEach(item => {
+      totalCost += item.FinalPrice * item.quantity;
+    });
+  }
+  return totalCost;
+}
+
+export function getCartCount() {
+  let cartNumber = 0;
+  const cartItems = getLocalStorage("so-cart") || [];
+  if (cartItems && cartItems.length > 0) {
+    cartItems.forEach(item => {
+      cartNumber += item.quantity;
+    });
+  }
+  return cartNumber;
+}

@@ -330,3 +330,17 @@ footer {
 .hide {
   display: none;
 }
+
+fieldset{
+  max-width:400px;
+  margin:auto;
+  margin-bottom: 1em;
+}
+
+label, input{
+  width: 100%;
+}
+
+input{
+  margin-bottom:1em;
+}

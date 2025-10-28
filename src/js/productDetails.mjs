@@ -1,5 +1,5 @@
 import { setLocalStorage, getLocalStorage } from "./utils.mjs";
-import { findProductById } from "./productData.mjs";
+import { findProductById } from "./externalServices.mjs";
 import { updateCartBadge } from "./cartBadge.js";
 
 document.addEventListener("DOMContentLoaded", updateCartBadge);
@@ -33,6 +33,7 @@ function cartAnimation() {
 }
 export function addToCart() {
   let cart = getLocalStorage("so-cart") || [];
+  product.quantity = 1;
   cart.push(product);
   setLocalStorage("so-cart", cart);
   updateCartBadge();
