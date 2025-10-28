@@ -1,4 +1,5 @@
-import { getCartTotal, getCartCount } from "./utils.mjs";
+import { getCartTotal, getCartCount, getLocalStorage } from "./utils.mjs";
+import { checkout } from "./externalServices.mjs";
 
 const checkoutProcess = {
     key: "",
@@ -16,19 +17,52 @@ const checkoutProcess = {
     },
 
     displaySubtotal() {
-      this.itemTotal = getCartTotal();
-      document.getElementById("subtotal-amount").textContent = `$${this.itemTotal.toFixed(2)}`;
+      this.itemTotal = getCartTotal().toFixed(2);
+      document.getElementById("subtotal-amount").textContent = `$${this.itemTotal}`;
     },
 
     displayDetails() {
+      const cartCount = getCartCount();
       this.shipping = 10 + ((getCartCount() - 1) * 2);
-      this.tax = this.itemTotal * 0.06;
-      this.orderTotal = this.itemTotal + this.shipping + this.tax;
+      this.tax = (this.itemTotal * 0.06).toFixed(2);
+      this.orderTotal = parseFloat(this.itemTotal) + parseFloat(this.shipping) + parseFloat(this.tax);
+      console.log(this.orderTotal);
       document.getElementById("item-count").textContent = cartCount;
       document.getElementById("shipping-amount").textContent = `$${this.shipping.toFixed(2)}`;
-      document.getElementById("tax-amount").textContent = `$${this.tax.toFixed(2)}`;
+      document.getElementById("tax-amount").textContent = `$${this.tax}`;
       document.getElementById("order-total-amount").textContent = `$${this.orderTotal.toFixed(2)}`;
+    },
+
+    async checkout(form){
+      const items = packageItems(this.list);
+      let orderData = {
+        orderDate: new Date().toISOString(),
+        fname: form.fname.value,
+        lname: form.lname.value,
+        street: form.street.value,
+        city: form.city.value,
+        state: form.state.value,
+        zip: form.zip.value,
+        cardNumber: form.cardNumber.value,
+        expiration: form.expiration.value,
+        code: form.code.value,
+        items: items,
+        orderTotal: this.orderTotal,
+        shipping: this.shipping,
+        tax: this.tax
+
     }
+    checkout(orderData);
+  }
+}
+
+function packageItems(items){
+  return items.map(item => ({
+    id: item.Id,
+    name: item.Name,
+    price: item.Price,
+    quantity: item.quantity
+  }));
 }
 
 export default checkoutProcess;

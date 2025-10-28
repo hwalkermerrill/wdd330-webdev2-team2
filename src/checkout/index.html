@@ -9,7 +9,7 @@
     <title>Sleep Outside | Checkout</title>
 
     <link rel="stylesheet" href="/css/style.css" />
-    <script src="../js/checkoutProcess.mjs" type="module" defer></script>
+    <script src="../js/checkout.js" type="module" defer></script>
   </head>
 
   <body>
@@ -21,10 +21,10 @@
         <form>
           <fieldset name="shipping">
             <legend for="shipping">Shipping</legend>
-            <label for="first_name">First Name</label>
-            <input type="text" id="first_name" name="first_name" required />
-            <label for="last_name">Last Name</label>
-            <input type="text" id="last_name" name="last_name" required />
+            <label for="fname">First Name</label>
+            <input type="text" id="fname" name="fname" required />
+            <label for="lname">Last Name</label>
+            <input type="text" id="lname" name="lname" required />
             <label for="street">Street</label>
             <input type="text" id="street" name="street" required />
             <label for="city">City</label>
@@ -36,12 +36,12 @@
           </fieldset>
           <fieldset name="payment">
             <legend for="payment">Payment</legend>
-            <label for="card_number">Card Number</label>
-            <input type="text" id="card_number" name="card_number" required />
+            <label for="cardNumber">Card Number</label>
+            <input type="text" id="cardNumber" name="cardNumber" value="1234123412341234" required />
             <label for="expiration">Expiration</label>
             <input type="text" id="expiration" name="expiration" required />
-            <label for="security_code">Security Code</label>
-            <input type="text" id="security_code" name="security_code" required />
+            <label for="code">Security Code</label>
+            <input type="text" id="code" name="code" value="123" required />
           </fieldset>
           <fieldset name="order-summary">
             <legend for="shipping">Order Summary</legend>

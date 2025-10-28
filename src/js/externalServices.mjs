@@ -33,3 +33,22 @@ export async function findProductById(id) {
     return null;
   }
 }
+
+export function checkout(order){
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(order)
+  };
+  fetch(`${baseURL}checkout`, options)
+    .then(response => response.json())
+    .then(data => {
+      console.log("Checkout successful:", data);
+      return data;
+    })
+    .catch(error => {
+      console.error("Error during checkout:", error);
+    });
+}
