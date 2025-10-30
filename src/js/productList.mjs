@@ -1,10 +1,11 @@
-import { getData } from "./productData.mjs";
+import { getProductsByCategory } from "./externalServices.mjs";
 import { renderListWithTemplate } from "./utils.mjs";
 
 const params = new URLSearchParams(window.location.search);
 const searchQuery = params.get("search");
 
 function productCardTemplate(product) {
+  // console.log(product);
   // Use PrimaryMedium image from API and fallback if missing
   const imageSrc = product.Images?.PrimaryMedium || "images/default-image.jpg";
   const altText = product.Name
@@ -23,7 +24,7 @@ function productCardTemplate(product) {
 
 export default async function productList(selector, category) {
   const el = document.querySelector(selector);
-  let products = await getData(category);
+  let products = await getProductsByCategory(category);
 
   // If a search query exists, filter results
   if (searchQuery) {
@@ -40,6 +41,5 @@ export default async function productList(selector, category) {
       return;
     }
   }
-
   renderListWithTemplate(productCardTemplate, el, products);
 }

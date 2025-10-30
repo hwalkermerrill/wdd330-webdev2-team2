@@ -8,10 +8,10 @@ function convertToJson(res) {
 }
 
 // --- Use environment variable for server URL ---
-const baseURL = import.meta.env.VITE_SERVER_URL;
+const baseURL = import.meta.env.VITE_SERVER_URL || "http://server-nodejs.cit.byui.edu:3000/";
 
 // --- Fetch all products in a given category ---
-export async function getData(category = "tents") {
+export async function getProductsByCategory(category = "tents") {
   try {
     const response = await fetch(`${baseURL}products/search/${category}`);
     const data = await convertToJson(response);
@@ -32,4 +32,23 @@ export async function findProductById(id) {
     console.error("Error fetching product:", error);
     return null;
   }
+}
+
+export function checkout(order){
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(order)
+  };
+  fetch(`${baseURL}checkout`, options)
+    .then(response => response.json())
+    .then(data => {
+      console.log("Checkout successful:", data);
+      return data;
+    })
+    .catch(error => {
+      console.error("Error during checkout:", error);
+    });
 }
