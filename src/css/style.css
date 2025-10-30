@@ -344,3 +344,42 @@ label, input{
 input{
   margin-bottom:1em;
 }
+
+.modal-holder{
+  position: absolute;
+  top:0;
+  left:0;
+  width:100%;
+  min-height:100%;
+  background-color: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.item-modal{
+  background-color: white;
+  padding: 1em;
+  margin:10px;
+  max-width: 800px;
+  width: 90%;
+  position: relative;
+  top: 50%;
+
+  border-radius: 10px;
+}
+
+.modal-details{
+  img{
+    max-width: 300px;
+    
+  }
+  max-width: 600px;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  p{
+    margin: 0.5em 0;
+    font-size: .8em;
+  }
+}
