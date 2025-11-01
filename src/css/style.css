@@ -383,3 +383,55 @@ input{
     font-size: .8em;
   }
 }
+.breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  padding: 0.5rem 1rem;
+  margin: 1rem 0;
+  background-color: #f8f9fa; /* light gray background */
+  border-radius: 0.5rem;
+  font-family: Arial, sans-serif;
+  font-size: 0.95rem;
+}
+
+/* Each breadcrumb item */
+.breadcrumb-item {
+  display: flex;
+  align-items: center;
+  color: #495057; /* default text color */
+}
+
+/* Separator arrow */
+.breadcrumb-item + .breadcrumb-item::before {
+  content: "›"; /* Unicode arrow */
+  margin: 0 0.5rem;
+  color: #6c757d; /* slightly lighter color for the separator */
+  font-weight: bold;
+}
+
+/* Links */
+.breadcrumb-item a {
+  text-decoration: none;
+  color: #007bff; /* blue links */
+  transition: color 0.2s;
+}
+
+.breadcrumb-item a:hover {
+  text-decoration: underline;
+  color: var(--primary-color); /* darker blue on hover */
+}
+
+/* Active breadcrumb (current page) */
+.breadcrumb-item.active {
+  color: #495057;
+  font-weight: 600;
+  cursor: default;
+}
+
+/* Optional: responsive wrap */
+@media (max-width: 600px) {
+  .breadcrumb {
+    font-size: 0.85rem;
+  }
+}

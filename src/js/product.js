@@ -15,6 +15,9 @@ const productId = getParam("product");
 
 productDetails(productId);
 
+
+
+
 // do we need this add to cart button event handler if our addToCart logic already lives inside
 // productDetails.mjs ????
 //async function addToCartHandler(e) {
@@ -22,6 +25,6 @@ productDetails(productId);
   //addProductToCart(product);
 //}
 
-//setTotalNumber();
+// setTotalNumber();
 
 // add listener to Add to Cart button
