@@ -63,3 +63,33 @@ export function renderProductDetails() {
   const addToCartBtn = document.getElementById("addToCart");
   if (addToCartBtn) addToCartBtn.dataset.id = product.Id;
 }
+export function loadBreadCrumbs() {
+  const params = new URLSearchParams(window.location.search);
+  const category = params.get("category");
+  const count = params.get("count"); // optional
+
+  const breadcrumbContainer = document.getElementById("breadcrumb");
+  const path = window.location.pathname.split("/").filter(Boolean);
+  let html = '<ol class="breadcrumb">';
+  html += '<li class="breadcrumb-item"><a href="/">Home</a></li>';
+
+  let accumulatedPath = "";
+  const visibleSegments = path.filter(seg => seg !== "index.html");
+
+  visibleSegments.forEach((segment, index) => {
+    accumulatedPath += `/${segment}`;
+
+    // Last segment in visible segments
+    if (index === visibleSegments.length - 1 && category) {
+      html += `<li class="breadcrumb-item"><a href="${accumulatedPath}">${decodeURIComponent(segment)}</a></li>`;
+      html += `<li class="breadcrumb-item active">${decodeURIComponent(category)}</li>`;
+    } else {
+      html += `<li class="breadcrumb-item"><a href="${accumulatedPath}">${decodeURIComponent(segment)}</a></li>`;
+    }
+  });
+
+  breadcrumbContainer.innerHTML = html;
+}
+
+loadBreadCrumbs();
+

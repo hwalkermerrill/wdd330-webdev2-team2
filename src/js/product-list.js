@@ -69,3 +69,6 @@ function openQuickView(productId) {
     document.body.removeChild(modalHolder);
   });
 }
+
+const breadCrumbs = document.getElementById("breadcrumbs");
+
