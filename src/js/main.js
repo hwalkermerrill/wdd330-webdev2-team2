@@ -54,3 +54,18 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+
+// Keeps banner ad from appearing more than once
+document.addEventListener("DOMContentLoaded", () => {
+  const modal = document.getElementById("register-modal");
+  const closeBtn = modal.querySelector(".modal-close-button");
+
+  if (!localStorage.getItem("seenSweepstakesPromo")) {
+    modal.classList.remove("hide");
+  }
+
+  closeBtn.addEventListener("click", () => {
+    modal.classList.add("hide");
+    localStorage.setItem("seenSweepstakesPromo", "true");
+  });
+});
