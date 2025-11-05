@@ -31,6 +31,7 @@ function cartAnimation() {
     document.querySelector(".cart").classList.remove("animate");
   }, 1000);
 }
+
 export function addToCart() {
   let cart = getLocalStorage("so-cart") || [];
   product.quantity = 1;
@@ -41,11 +42,13 @@ export function addToCart() {
 
 }
 
-
 export function renderProductDetails() {
-  // Use correct API image structure
+  // Constants at the top
   const imageSrc = product.Images?.PrimaryLarge || "images/default-image.jpg";
   const colorName = product.Colors?.[0]?.ColorName || "N/A";
+  const discountElement = document.getElementById("productDiscount");
+  const originalPriceElement = document.getElementById("productOriginalPrice")
+  console.log(product);
 
   // Update content safely
   document.getElementById("productName").textContent = product.Name;
@@ -56,6 +59,27 @@ export function renderProductDetails() {
   document.getElementById("productFinalPrice").textContent = `$${product.FinalPrice}`;
   document.getElementById("productColorName").textContent = colorName;
 
+  // Insert Discount Flag
+  if (discountElement &&
+    product.SuggestedRetailPrice &&
+    product.FinalPrice < product.SuggestedRetailPrice
+  ) {
+    const discount = Math.round(
+      ((product.SuggestedRetailPrice - product.FinalPrice) / product.SuggestedRetailPrice) * 100
+    );
+    discountElement.textContent = `${discount}% OFF`;
+    discountElement.style.display = "inline-block"; // switches from hidden to visible
+
+    if (originalPriceElement) {
+      originalPriceElement.textContent = `$${product.SuggestedRetailPrice}`;
+      originalPriceElement.style.textDecoration = "line-through";
+      originalPriceElement.style.display = "inline-block"; // switches from hidden to visible
+    }
+  } else {
+    if (discountElement) discountElement.style.display = "none";
+    if (originalPriceElement) originalPriceElement.style.display = "none";
+  }
+
   // Some API descriptions are HTML-formatted — render safely
   document.getElementById("productDescriptionHtmlSimple").innerHTML =
     product.DescriptionHtmlSimple || product.Description || "No description available.";
@@ -63,15 +87,16 @@ export function renderProductDetails() {
   const addToCartBtn = document.getElementById("addToCart");
   if (addToCartBtn) addToCartBtn.dataset.id = product.Id;
 }
+
 export function loadBreadCrumbs() {
   const params = new URLSearchParams(window.location.search);
   const category = params.get("category");
-  const count = params.get("count"); // optional
+  // const count = params.get("count");
 
   const breadcrumbContainer = document.getElementById("breadcrumb");
   const path = window.location.pathname.split("/").filter(Boolean);
-  let html = '<ol class="breadcrumb">';
-  html += '<li class="breadcrumb-item"><a href="/">Home</a></li>';
+  let html = "<ol class=\"breadcrumb\">";
+  html += "<li class=\"breadcrumb-item\"><a href=\"/\">Home</a></li>";
 
   let accumulatedPath = "";
   const visibleSegments = path.filter(seg => seg !== "index.html");

@@ -41,17 +41,18 @@ function openQuickView(productId) {
     <button class="modal-close-button">X</button>
     <section class="modal-details product-detail">
         <h4 id="productName"></h4>
-
         <h4 class="divider" id="productNameWithoutBrand"></h4>
 
-        <img id="productImage" class="divider" src="" alt="" />
+        <img id="productImage" class="divider" src="" alt="">
 
-        <p class="product_card__discount" id="productDiscount"></p>
-
-        <p class="product-card__price" id="productFinalPrice"></p>
+        <!-- Price Block -->
+        <div class="product_pricing">
+          <p class="product-card__price--original" id="productOriginalPrice"></p>
+          <p class="product-card__discount" id="productDiscount"></p>
+          <p class="product-card__price" id="productFinalPrice"></p>
+        </div>
 
         <p class="product__color" id="productColorName"></p>
-
         <p class="product__description" id="productDescriptionHtmlSimple"></p>
 
         <div class="product-detail__add">
