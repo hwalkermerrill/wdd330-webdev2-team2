@@ -10,13 +10,13 @@ document.addEventListener("DOMContentLoaded", async () => {
   // Determine what page we're on
   const path = window.location.pathname;
 
-  // ✅ If we're on the product list page, load tents
+  // If we're on the product list page, load tents
   if (path.includes("product-list")) {
     productList(".product-list", "tents");
   }
 });
 
-// ✅ Attach search event listener after header loads
+// Attach search event listener after header loads
 document.addEventListener("DOMContentLoaded", () => {
   const header = document.getElementById("main-header");
 
@@ -40,4 +40,17 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   observer.observe(header, { childList: true, subtree: true });
+});
+
+// Friendly message for newsletter submission form
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("newsletter-form");
+  if (form) {
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const email = document.getElementById("newsletter-email").value;
+      alert(`Thanks for subscribing, ${email}!`);
+      form.reset();
+    });
+  }
 });
