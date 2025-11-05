@@ -1,46 +1,51 @@
-<!doctype html>
+<!DOCTYPE html>
 
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
-    <title>Sleep Outside | Cedar Ridge Rimrock 2-person tent</title>
 
-    
-    <link rel="stylesheet" href="../css/style.css" />
-    
-    <script src="../js/product.js" type="module" defer></script>
-  </head>
+<head>
+  <meta charset="UTF-8">
 
-  <body>
-    
-    <header id="main-header"></header>
-      <nav id="breadcrumb">hello</nav>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <main class="divider">
-      <section class="product-detail">
-        <h3 id="productName"></h3>
+  <title>Sleep Outside | Cedar Ridge Rimrock 2-person tent</title>
 
-        <h2 class="divider" id="productNameWithoutBrand"></h2>
 
-        <img id="productImage" class="divider" src="" alt="" />
+  <link rel="stylesheet" href="../css/style.css">
 
-        <p class="product_card__discount" id="productDiscount"></p>
+  <script src="../js/product.js" type="module"></script>
+</head>
 
+<body>
+
+  <header id="main-header"></header>
+  <nav id="breadcrumb">hello</nav>
+
+  <main class="divider">
+    <section class="product-detail">
+      <h3 id="productName">Loading product name...</h3>
+      <h2 class="divider" id="productNameWithoutBrand">Loading product details...</h2>
+
+      <img id="productImage" class="divider"
+        src="http://server-nodejs.cit.byui.edu:3000/images/sleepoutside/mystery-ranch-urban-assault-21l-backpack-in-lemon~p~28upm_08~320.jpg"
+        alt="Image of Mystery Ranch Urban Assault 21L Backpack">
+
+      <!-- Price Block -->
+      <div class="product_pricing">
+        <p class="product-card__price--original" id="productOriginalPrice"></p>
+        <p class="product-card__discount" id="productDiscount"></p>
         <p class="product-card__price" id="productFinalPrice"></p>
+      </div>
 
-        <p class="product__color" id="productColorName"></p>
+      <p class="product__color" id="productColorName"></p>
+      <p class="product__description" id="productDescriptionHtmlSimple"></p>
 
-        <p class="product__description" id="productDescriptionHtmlSimple"></p>
+      <div class="product-detail__add">
+        <button id="addToCart" data-id="">Add to Cart</button>
+      </div>
+    </section>
+  </main>
 
-        <div class="product-detail__add">
-          <button id="addToCart" data-id="">Add to Cart</button>
-        </div>
-      </section>
-    </main>
+  <footer id="main-footer"></footer>
+</body>
 
-    <footer id="main-footer"></footer>
-  </body>
 </html>
