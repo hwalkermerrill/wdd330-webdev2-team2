@@ -40,6 +40,7 @@ function productCardTemplate(product) {
 
 export default async function productList(selector, category) {
   const el = document.querySelector(selector);
+  const sortSelect = document.querySelector("sort");
   let products = await getProductsByCategory(category);
 
   // If a search query exists, filter results
@@ -57,5 +58,37 @@ export default async function productList(selector, category) {
       return;
     }
   }
-  renderListWithTemplate(productCardTemplate, el, products);
+
+  // Sorting helper function
+  function applySort(list, sortValue) {
+    let sorted = [...list];
+    switch (sortValue) {
+      case "name-asc":
+        sorted.sort((a, b) => a.Name.localeCompare(b.Name));
+        break;
+      case "name-desc":
+        sorted.sort((a, b) => b.Name.localeCompare(a.Name));
+        break;
+      case "price-asc":
+        sorted.sort((a, b) => a.FinalPrice - b.FinalPrice);
+        break;
+      case "price-desc":
+        sorted.sort((a, b) => b.FinalPrice - a.FinalPrice);
+        break;
+    }
+    return sorted;
+  }
+
+  let initialSort = sortSelect ? sortSelect.value : "name-asc";
+  let sortedProducts = applySort(products, initialSort);
+  renderListWithTemplate(productCardTemplate, el, sortedProducts);
+
+  if (sortSelect) {
+    sortSelect.addEventListener("change", () => {
+      const sorted = applySort(products, sortSelect.value);
+      renderListWithTemplate(productCardTemplate, el, sorted);
+    });
+  }
+
+
 }

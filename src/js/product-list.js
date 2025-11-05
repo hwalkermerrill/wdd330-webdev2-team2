@@ -8,10 +8,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   await loadHeaderFooter();
 });
 
-// Get the category parameter from the URL (default to tents)
+// Place constants at the top
 const category = getParam("category") || "tents";
-
-// Fix and format the heading text
+const breadCrumbs = document.getElementById("breadcrumbs");
 const heading = document.getElementById("page-title");
 if (heading) {
   // Capitalize first letter and replace hyphens with spaces
@@ -23,10 +22,10 @@ if (heading) {
 productList("#product-list", category).then(() => {
 
   let buttons = document.querySelectorAll(".quick-view-button");
-  console.log(buttons);
+  // console.log(buttons);
   buttons.forEach(button => {
     button.addEventListener("click", (e) => {
-      console.log("Quick View button clicked");
+      // console.log("Quick View button clicked");
       const productId = e.target.id;
       openQuickView(productId);
     });
@@ -70,6 +69,4 @@ function openQuickView(productId) {
     document.body.removeChild(modalHolder);
   });
 }
-
-const breadCrumbs = document.getElementById("breadcrumbs");
 
