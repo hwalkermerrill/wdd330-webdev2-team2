@@ -1,9 +1,17 @@
 // --- Convert response to JSON ---
-function convertToJson(res) {
+// function convertToJson(res) {
+//   if (res.ok) {
+//     return res.json();
+//   } else {
+//     throw new Error("Bad Response");
+//   }
+// }
+async function convertToJson(res) {
+  const jsonResponse = await res.json();
   if (res.ok) {
-    return res.json();
+    return jsonResponse;
   } else {
-    throw new Error("Bad Response");
+    throw { name: "servicesError", message: jsonResponse };
   }
 }
 
@@ -34,7 +42,7 @@ export async function findProductById(id) {
   }
 }
 
-export function checkout(order){
+export function checkout(order) {
   const options = {
     method: 'POST',
     headers: {
@@ -45,7 +53,7 @@ export function checkout(order){
   fetch(`${baseURL}checkout`, options)
     .then(response => response.json())
     .then(data => {
-      console.log("Checkout successful:", data);
+      // console.log("Checkout successful:", data);
       return data;
     })
     .catch(error => {
