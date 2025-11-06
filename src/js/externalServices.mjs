@@ -53,10 +53,11 @@ export function checkout(order) {
   fetch(`${baseURL}checkout`, options)
     .then(response => response.json())
     .then(data => {
-      // console.log("Checkout successful:", data);
+      console.log("Checkout successful:", data);
       return data;
     })
     .catch(error => {
       console.error("Error during checkout:", error);
+      return error;
     });
 }
