@@ -1,4 +1,4 @@
-import { setLocalStorage, getLocalStorage } from "./utils.mjs";
+import { setLocalStorage, getLocalStorage, alertMessage } from "./utils.mjs";
 import { findProductById } from "./externalServices.mjs";
 import { updateCartBadge } from "./cartBadge.js";
 
@@ -21,8 +21,8 @@ export default async function productDetails(productId) {
     // Add event listener for cart button
     const addBtn = document.getElementById("addToCart");
     if (addBtn) addBtn.addEventListener("click", addToCart);
-  } catch (error) {
-    console.error("Error loading product details:", error);
+  } catch {
+    alertMessage("Error loading product details. Please try again later.", true, "error");
   }
 }
 function cartAnimation() {
@@ -40,6 +40,7 @@ export function addToCart() {
   updateCartBadge();
   cartAnimation();
 
+  alertMessage(`${product.Name} added to cart!`, true, "success");
 }
 
 export function renderProductDetails() {
@@ -48,9 +49,7 @@ export function renderProductDetails() {
   const colorName = product.Colors?.[0]?.ColorName || "N/A";
   const discountElement = document.getElementById("productDiscount");
   const originalPriceElement = document.getElementById("productOriginalPrice")
-  console.log(product);
 
-  // Update content safely
   document.getElementById("productName").textContent = product.Name;
   document.getElementById("productNameWithoutBrand").textContent =
     product.NameWithoutBrand || product.Name;

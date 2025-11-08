@@ -1,6 +1,5 @@
-import { getCartTotal, getCartCount, getLocalStorage } from "./utils.mjs";
+import { getCartTotal, getCartCount, getLocalStorage, alertMessage } from "./utils.mjs";
 import { checkout } from "./externalServices.mjs";
-import { alertMessage } from "./utils.mjs";
 
 const checkoutProcess = {
   key: "",
@@ -63,7 +62,13 @@ const checkoutProcess = {
       if (err.name === "jsonError") {
         message = "There was a problem processing your order. Please try again.";
       } else if (err.name === "servicesError") {
-        message = `Service error: ${err.message}`;
+        if (typeof err.message === "string") {
+          message = `Service error: ${err.message}`;
+        } else if (err.message?.message) {
+          message = `Service error: ${err.message.message}`;
+        } else {
+          message = JSON.stringify(err.message);
+        }
       }
       alertMessage(message, true, "error");
     }
