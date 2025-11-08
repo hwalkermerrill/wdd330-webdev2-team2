@@ -1,17 +1,15 @@
 // --- Convert response to JSON ---
-// function convertToJson(res) {
-//   if (res.ok) {
-//     return res.json();
-//   } else {
-//     throw new Error("Bad Response");
-//   }
-// }
-async function convertToJson(res) {
-  const jsonResponse = await res.json();
+export async function convertToJson(res) {
+  let jsonResponse;
+  try {
+    jsonResponse = await res.json();
+  } catch {
+    throw { name: "jsonError", message: "Failed to parse JSON" };
+  }
   if (res.ok) {
     return jsonResponse;
   } else {
-    throw { name: "servicesError", message: jsonResponse };
+    throw { name: "servicesError", message: jsonResponse, status: res.status };
   }
 }
 
@@ -42,22 +40,13 @@ export async function findProductById(id) {
   }
 }
 
-export function checkout(order) {
+export async function checkout(order) {
   const options = {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify(order)
   };
-  fetch(`${baseURL}checkout`, options)
-    .then(response => response.json())
-    .then(data => {
-      console.log("Checkout successful:", data);
-      return data;
-    })
-    .catch(error => {
-      console.error("Error during checkout:", error);
-      return error;
-    });
+  const response = await fetch(`${baseURL}checkout`, options)
+  const data = await convertToJson(response);
+  return data;
 }
