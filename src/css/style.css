@@ -529,6 +529,41 @@ input {
   background-color: var(--secondary-color);
 }
 
+/* --- Error Message Styling---  */
+.alert-message {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.75rem;
+  align-items: start;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  background: #fff4f4;
+  border: 1px solid #ffb3b3;
+  color: #7a1c1c;
+}
+
+.alert-message.success {
+  background: #f1fff4;
+  border-color: #9ad3a6;
+  color: #1c5e2a;
+}
+
+.alert-message__title {
+  font-weight: 600;
+}
+.alert-message__message {
+  margin: 0.25rem 0 0;
+}
+
+.alert-message__close {
+  background: transparent;
+  border: none;
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
 .breadcrumb {
   display: flex;
   flex-wrap: wrap;
