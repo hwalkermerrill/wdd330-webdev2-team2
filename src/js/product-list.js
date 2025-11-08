@@ -41,7 +41,7 @@ function openQuickView(productId) {
     <div class="item-modal">
     <button class="modal-close-button">X</button>
     <section class="modal-details product-detail">
-        <h4 id="productName"></h4>
+        <h3 id="productName"></h3>
         <h4 class="divider" id="productNameWithoutBrand"></h4>
 
         <img id="productImage" class="divider" src="" alt="">
@@ -62,13 +62,15 @@ function openQuickView(productId) {
       </section>
     </div>
   `;
-  document.body.appendChild(modalHolder);
+  document.body.prepend(modalHolder);
+  document.body.classList.add("no-scroll");
   productDetails(productId);
 
   // Add event listener to close the modal
   const closeButton = modalHolder.querySelector(".modal-close-button");
   closeButton.addEventListener("click", () => {
     document.body.removeChild(modalHolder);
+    document.body.classList.remove("no-scroll");
   });
 }
 
