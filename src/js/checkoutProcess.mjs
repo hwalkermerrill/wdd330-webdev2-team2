@@ -33,6 +33,12 @@ const checkoutProcess = {
   },
 
   async checkout(form) {
+    // Block Checkout if Cart is Empty
+    if (!this.list || this.list.length === 0) {
+      alertMessage("Your cart is empty. Please add items before checking out.", true, "error");
+      return;
+    }
+
     const items = packageItems(this.list);
     let orderData = {
       orderDate: new Date().toISOString(),
@@ -56,19 +62,26 @@ const checkoutProcess = {
       localStorage.removeItem(this.key);
       window.location.href = "/checkout/success.html";
       return response;
-    } catch (err) {
-      // Error handling here
+    }
+    // Error handling here
+    catch (err) {
       let message = "An error occurred during checkout.";
       if (err.name === "jsonError") {
         message = "There was a problem processing your order. Please try again.";
       } else if (err.name === "servicesError") {
         if (typeof err.message === "string") {
           message = `Service error: ${err.message}`;
-        } else if (err.message?.message) {
-          message = `Service error: ${err.message.message}`;
+        } else if (err.message && typeof err.message === "object") {
+          // Build a readable string from field errors
+          message = Object.entries(err.message)
+            .map(([field, msg]) => `${field}: ${msg}`)
+            .join(", ");
         } else {
           message = JSON.stringify(err.message);
         }
+
+      } else {
+        message = `Unexpected error: ${err.message || err}`;
       }
       alertMessage(message, true, "error");
     }

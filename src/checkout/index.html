@@ -31,18 +31,18 @@
           <label for="city">City</label>
           <input type="text" id="city" name="city" required>
           <label for="state">State</label>
-          <input type="text" id="state" name="state" required>
+          <input type="text" id="state" name="state" pattern="[A-Za-z]{2}" required>
           <label for="zip">Zip Code</label>
-          <input type="text" id="zip" name="zip" required>
+          <input type="text" id="zip" name="zip" pattern="[0-9]{5}" required>
         </fieldset>
         <fieldset name="payment">
           <legend>Payment</legend>
           <label for="cardNumber">Card Number</label>
-          <input type="text" id="cardNumber" name="cardNumber" value="1234123412341234" required>
-          <label for="expiration">Expiration</label>
+          <input type="text" id="cardNumber" name="cardNumber" value="1234123412341234" pattern="[0-9]{16}" required>
+          <label for="expiration">Expiration (MM/YY)</label>
           <input type="text" id="expiration" name="expiration" required>
           <label for="code">Security Code</label>
-          <input type="text" id="code" name="code" value="123" required>
+          <input type="text" id="code" name="code" value="123" pattern="[0-9]{3,4}" required>
         </fieldset>
         <fieldset name="order-summary">
           <legend>Order Summary</legend>
