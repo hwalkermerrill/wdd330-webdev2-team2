@@ -4,7 +4,7 @@ const zip = document.getElementById("zip");
 
 checkoutProcess.init("so-cart", "#checkout-items");
 
-zip.addEventListener("focusout", () => checkoutProcess.displayDetails());
+zip.addEventListener("change", () => checkoutProcess.displayDetails());
 
 const checkoutForm = document.querySelector("form");
 checkoutForm.addEventListener("submit", async (e) => {

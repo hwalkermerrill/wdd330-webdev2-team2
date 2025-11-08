@@ -22,7 +22,7 @@ function productCardTemplate(product) {
   // console.log(product);
 
   return `<li class="product-card">
-    <a href="../product_pages/index.html?product=${product.Id}">
+    <a href="../product_pages/?product=${product.Id}">
       <img src="${imageSrc}" alt="${altText}" loading="lazy">
       <h3 class="card__brand">${product.Brand?.Name || "Unknown Brand"}</h3>
       <h2 class="card__name">${product.NameWithoutBrand || product.Name}</h2>

@@ -136,7 +136,7 @@ function cartItemTemplate(item) {
     src="${item.Images.PrimaryMedium}"
     alt="${item.Name}"
   />
-  <a href="/product_pages/index.html?product=${item.Id}"  class="card__name">
+  <a href="/product_pages/?product=${item.Id}"  class="card__name">
     <h2 class="card__name">${item.Name}</h2>
   </a>
   <p class="cart-card__color">${item.Colors[0].ColorName}</p>

@@ -67,6 +67,7 @@ header {
   align-items: center;
   gap: 0.5rem;
   margin-left: auto;
+  padding: .5em;
 }
 
 .search-form input[type="text"] {
@@ -75,6 +76,7 @@ header {
   border-radius: 0.5rem;
   font-size: 1rem;
   outline: none;
+  margin:0;
   transition:
     border-color 0.3s ease,
     box-shadow 0.3s ease;
@@ -191,6 +193,10 @@ button {
   gap: 0.5em;
   list-style-type: none;
   padding: 0;
+  align-items: center;
+  justify-items: center;
+  row-gap: 1em;
+  padding: 1em;
 }
 .product-list a {
   text-decoration: none;
@@ -206,7 +212,17 @@ button {
   margin: 0.25em;
   padding: 0.5em;
   border: 1px solid var(--light-grey);
-  max-width: 250px;
+  width: 100%;
+  max-width: 300px;
+  a{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  img{
+    margin: auto;
+  }
 }
 .product-card h2,
 .product-card h3,
