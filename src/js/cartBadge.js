@@ -5,12 +5,13 @@ export function updateCartBadge() {
   if (!badge) return;
 
   const cartItems = getLocalStorage("so-cart") || [];
-  const count = cartItems.length;
+  let count = 0;
+  for (const item of cartItems) {
+    count += item.quantity || 1;
+  }
 
   badge.textContent = count;
 
   // Optional: hide badge if empty
   badge.style.display = count > 0 ? "inline-block" : "none";
 }
-
-updateCartBadge();

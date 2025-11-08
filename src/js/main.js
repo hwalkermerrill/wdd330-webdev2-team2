@@ -1,11 +1,13 @@
 import { loadHeaderFooter } from "./utils.mjs";
 import { loadAlerts } from "./alert.mjs";
 import productList from "./productList.mjs";
+import { updateCartBadge } from "./cartBadge";
 
 document.addEventListener("DOMContentLoaded", async () => {
   // Load shared site elements
   await loadHeaderFooter();
   await loadAlerts();
+  updateCartBadge();
 
   // Determine what page we're on
   const path = window.location.pathname;
