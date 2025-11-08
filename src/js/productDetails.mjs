@@ -33,12 +33,21 @@ function cartAnimation() {
 }
 
 export function addToCart() {
-  let cart = getLocalStorage("so-cart") || [];
-  product.quantity = 1;
-  cart.push(product);
-  setLocalStorage("so-cart", cart);
-  updateCartBadge();
-  cartAnimation();
+    let cart = getLocalStorage("so-cart") || [];
+    const existingProduct = cart.find((item) => item.Id === product.Id);
+    if (existingProduct) {
+        existingProduct.quantity += 1;
+        setLocalStorage("so-cart", cart);
+        updateCartBadge();
+        cartAnimation();
+        return;
+    }
+    // If not, add new product with quantity 1
+    product.quantity = 1;
+    cart.push(product);
+    setLocalStorage("so-cart", cart);
+    updateCartBadge();
+    cartAnimation();
 
 }
 

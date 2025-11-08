@@ -129,22 +129,22 @@ document.querySelector(".product-list").addEventListener("click", e => {
  
 
 function cartItemTemplate(item) {
+  console.log(item);
   const newItem = `<li class="cart-card divider">
-  <a href="#" class="cart-card__image">
-    <img
-      src="${item.Image}"
-      alt="${item.Name}"
-    />
-  </a>
-  <a href="#">
+  <img
+    class="cart-card__image"
+    src="${item.Images.PrimaryMedium}"
+    alt="${item.Name}"
+  />
+  <a href="/product_pages/index.html?product=${item.Id}"  class="card__name">
     <h2 class="card__name">${item.Name}</h2>
   </a>
   <p class="cart-card__color">${item.Colors[0].ColorName}</p>
   <div class="cart-card__quantity-controls">
-        <p class="cart-card__quantity">qty: ${item.quantity}</p>
-        <button class="decreaseQty" data-id="${item.Id}">-</button>
-        <button class="increaseQty" data-id="${item.Id}">+</button>
-      </div>
+      <button class="decreaseQty" data-id="${item.Id}">-</button>
+      <p class="cart-card__quantity">Qty: ${item.quantity}</p>
+      <button class="increaseQty" data-id="${item.Id}">+</button>
+  </div>
   
   <p class="cart-card__price">$${item.FinalPrice}</p>
   <button class="removeFromCart" data-id="${item.Id}">x</button>
