@@ -1,9 +1,17 @@
 // --- Convert response to JSON ---
-function convertToJson(res) {
+import { alertMessage } from "./utils.mjs";
+
+export async function convertToJson(res) {
+  let jsonResponse;
+  try {
+    jsonResponse = await res.json();
+  } catch {
+    throw { name: "jsonError", message: "Failed to parse JSON" };
+  }
   if (res.ok) {
-    return res.json();
+    return jsonResponse;
   } else {
-    throw new Error("Bad Response");
+    throw { name: "servicesError", message: jsonResponse, status: res.status };
   }
 }
 
@@ -16,8 +24,8 @@ export async function getProductsByCategory(category = "tents") {
     const response = await fetch(`${baseURL}products/search/${category}`);
     const data = await convertToJson(response);
     return data.Result; // API returns { Result: [...] }
-  } catch (error) {
-    console.error("Error fetching data:", error);
+  } catch {
+    alertMessage("Error fetching products. Please try again later.", true, "error");
     return [];
   }
 }
@@ -28,27 +36,19 @@ export async function findProductById(id) {
     const response = await fetch(`${baseURL}product/${id}`);
     const data = await convertToJson(response);
     return data.Result; // single product object
-  } catch (error) {
-    console.error("Error fetching product:", error);
+  } catch {
+    alertMessage("Error fetching product details. Please try again later.", true, "error");
     return null;
   }
 }
 
-export function checkout(order){
+export async function checkout(order) {
   const options = {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify(order)
   };
-  fetch(`${baseURL}checkout`, options)
-    .then(response => response.json())
-    .then(data => {
-      console.log("Checkout successful:", data);
-      return data;
-    })
-    .catch(error => {
-      console.error("Error during checkout:", error);
-    });
+  const response = await fetch(`${baseURL}checkout`, options)
+  const data = await convertToJson(response);
+  return data;
 }

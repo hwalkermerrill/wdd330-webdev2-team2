@@ -9,5 +9,9 @@ zip.addEventListener("focusout", () => checkoutProcess.displayDetails());
 const checkoutForm = document.querySelector("form");
 checkoutForm.addEventListener("submit", async (e) => {
   e.preventDefault();
-  await checkoutProcess.checkout(checkoutForm);
+  const isValid = checkoutForm.checkValidity();
+  checkoutForm.reportValidity();
+  if (isValid) {
+    await checkoutProcess.checkout(checkoutForm);
+  }
 });
