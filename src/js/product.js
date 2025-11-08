@@ -7,13 +7,14 @@ import { loadHeaderFooter } from "./utils.mjs";
 // Load shared header and footer
 document.addEventListener("DOMContentLoaded", async () => {
   await loadHeaderFooter();
+  updateCartBadge();
 });
 
-document.addEventListener("DOMContentLoaded", updateCartBadge);
 const productId = getParam("product");
 
 
 productDetails(productId);
+
 
 
 

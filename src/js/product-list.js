@@ -2,10 +2,12 @@ import productList from "./productList.mjs";
 import { getParam } from "./utils.mjs";
 import { loadHeaderFooter } from "./utils.mjs";
 import productDetails from "./productDetails.mjs";
+import { updateCartBadge } from "./cartBadge";
 
 // Load shared header and footer
 document.addEventListener("DOMContentLoaded", async () => {
   await loadHeaderFooter();
+  updateCartBadge();
 });
 
 // Place constants at the top
