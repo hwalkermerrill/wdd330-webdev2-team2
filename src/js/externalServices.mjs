@@ -1,4 +1,6 @@
 // --- Convert response to JSON ---
+import { alertMessage } from "./utils.mjs";
+
 export async function convertToJson(res) {
   let jsonResponse;
   try {
@@ -22,8 +24,8 @@ export async function getProductsByCategory(category = "tents") {
     const response = await fetch(`${baseURL}products/search/${category}`);
     const data = await convertToJson(response);
     return data.Result; // API returns { Result: [...] }
-  } catch (error) {
-    console.error("Error fetching data:", error);
+  } catch {
+    alertMessage("Error fetching products. Please try again later.", true, "error");
     return [];
   }
 }
@@ -34,8 +36,8 @@ export async function findProductById(id) {
     const response = await fetch(`${baseURL}product/${id}`);
     const data = await convertToJson(response);
     return data.Result; // single product object
-  } catch (error) {
-    console.error("Error fetching product:", error);
+  } catch {
+    alertMessage("Error fetching product details. Please try again later.", true, "error");
     return null;
   }
 }
