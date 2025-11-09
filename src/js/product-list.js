@@ -3,6 +3,7 @@ import { getParam } from "./utils.mjs";
 import { loadHeaderFooter } from "./utils.mjs";
 import productDetails from "./productDetails.mjs";
 import { updateCartBadge } from "./cartBadge";
+import { renderThumbnails } from "./productDetails.mjs";
 
 // Load shared header and footer
 document.addEventListener("DOMContentLoaded", async () => {
@@ -44,8 +45,12 @@ function openQuickView(productId) {
         <h3 id="productName"></h3>
         <h4 class="divider" id="productNameWithoutBrand"></h4>
 
-        <img id="productImage" class="divider" src="" alt="">
-
+        <div class="product-image-carousel">
+          <img id="productImage" class="divider" src="" alt="">
+          <div  id="thumbnailContainer" class="thumbnails">
+            <ul class="thumbnails"></ul>
+          </div>
+        </div>
         <!-- Price Block -->
         <div class="product_pricing">
           <p class="product-card__price--original" id="productOriginalPrice"></p>
@@ -72,5 +77,6 @@ function openQuickView(productId) {
     document.body.removeChild(modalHolder);
     document.body.classList.remove("no-scroll");
   });
+  renderThumbnails();
 }
 
