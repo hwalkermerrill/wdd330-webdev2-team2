@@ -87,6 +87,7 @@ export function renderProductDetails() {
     if (discountElement) discountElement.style.display = "none";
     if (originalPriceElement) originalPriceElement.style.display = "none";
   }
+  renderThumbnails();
 
   // Some API descriptions are HTML-formatted — render safely
   document.getElementById("productDescriptionHtmlSimple").innerHTML =
@@ -122,6 +123,41 @@ export function loadBreadCrumbs() {
   });
 
   breadcrumbContainer.innerHTML = html;
+}
+
+export function renderThumbnails() {
+  const hasExtraImages = product.Images?.ExtraImages?.length > 0;
+  
+  if (!hasExtraImages) {
+    return;
+  }
+  
+  let allImages = [];
+  allImages.push(product.Images.PrimaryLarge);
+  
+  product.Images.ExtraImages.forEach(img => {
+    allImages.push(img.Src);
+  });
+  
+  const thumbnailContainer = document.getElementById("thumbnailContainer");
+  const ul = thumbnailContainer.querySelector("ul");
+  
+  ul.innerHTML = "";
+  
+  allImages.forEach((imageSrc, index) => {
+    const li = document.createElement("li");
+    const img = document.createElement("img");
+    img.src = imageSrc;
+    img.alt = `Thumbnail ${index + 1}`;
+    img.classList.add("thumbnail");
+    
+    img.addEventListener("click", () => {
+      document.getElementById("productImage").src = imageSrc;
+    });
+    
+    li.appendChild(img);
+    ul.appendChild(li);
+  });
 }
 
 loadBreadCrumbs();
