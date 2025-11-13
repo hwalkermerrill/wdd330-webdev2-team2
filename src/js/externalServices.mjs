@@ -1,6 +1,7 @@
 // --- Convert response to JSON ---
 import { alertMessage } from "./utils.mjs";
 
+
 export async function convertToJson(res) {
   let jsonResponse;
   try {
@@ -52,3 +53,38 @@ export async function checkout(order) {
   const data = await convertToJson(response);
   return data;
 }
+
+export async function loginRequest(creds){
+  const options = {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(creds)
+  };
+  const response = await fetch(`${baseURL}login`, options);
+  const data = await convertToJson(response);
+  
+  // Log everything and pause
+  console.log("===== LOGIN RESPONSE =====");
+  console.log("Full data:", data);
+  console.log("Type:", typeof data);
+  console.log("Keys:", Object.keys(data));
+  console.log("data.accessToken:", data.accessToken);
+  console.log("data.token:", data.token);
+  console.log("data.access_token:", data.access_token);
+  console.log("==========================");
+  
+  debugger; // This will pause execution so you can read the logs
+  
+  return data.accessToken;
+}
+
+export async function getOrders(token){
+  const options = {
+    method: "GET",
+    headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` }
+  };
+  const response = await fetch(`${baseURL}orders`, options);
+  const data = await convertToJson(response);
+  return data;
+}
+
