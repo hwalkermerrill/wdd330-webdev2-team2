@@ -1,11 +1,12 @@
 import { loadHeaderFooter, getParam} from "./utils.mjs";
+import { updateCartBadge } from "./cartBadge";
 import { login } from "./auth.mjs";
 
 
 // Load shared header and footer
 document.addEventListener("DOMContentLoaded", async () => {
     await loadHeaderFooter();
-
+    updateCartBadge();
     const submit_button = document.getElementById("submit_button");
 
     if (!submit_button) {

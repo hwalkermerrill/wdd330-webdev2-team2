@@ -72,7 +72,7 @@ header {
 
 .search-form input[type="text"] {
   padding: 0.5rem 0.75rem;
-  border: 2px solid var(--accent, #4caf50);
+  border: 2px solid var(--primary-color);
   border-radius: 0.5rem;
   font-size: 1rem;
   outline: none;
@@ -83,14 +83,14 @@ header {
 }
 
 .search-form input[type="text"]:focus {
-  border-color: var(--highlight, #3e8e41);
+  border-color: var(--secondary-color);
   box-shadow: 0 0 4px rgba(60, 179, 113, 0.3);
 }
 
 .search-form button {
   padding: 0.5rem 1rem;
   border: none;
-  background-color: var(--highlight, #4caf50);
+  background-color: var(--secondary-color);
   color: white;
   border-radius: 0.5rem;
   font-size: 1rem;
@@ -99,7 +99,7 @@ header {
 }
 
 .search-form button:hover {
-  background-color: var(--highlight-dark, #3e8e41);
+  background-color: var(--tertiary-color);
 }
 .hero {
   position: relative;
@@ -564,6 +564,7 @@ input {
   border: 1px solid var(--light-grey);
   border-radius: 0.25rem;
   flex: 1 1 250px;
+  margin: 0;
 }
 
 .newsletter button {
@@ -718,4 +719,25 @@ input {
 }
 #similarProductsTitle{
   margin-left: 50px;
+}
+
+#login-form, #register-form {
+  display: flex;
+  flex-direction: column;
+  max-width: 600px;
+  margin: auto;
+  padding: 1em;
+  border-radius: 10px;
+  box-shadow: 0 0 10px var(--light-grey);
+  input{
+    margin-bottom: 1em;
+    padding: 0.5em;
+    border: 1px solid var(--light-grey);
+    border-radius: 5px;
+    font-size: 1em;
+  }
+  label {
+    font-weight: bold;
+    padding: 0.5em 0 0.2em;
+  }
 }

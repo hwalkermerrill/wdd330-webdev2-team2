@@ -1,4 +1,5 @@
 // --- Convert response to JSON ---
+import { login } from "./auth.mjs";
 import { alertMessage } from "./utils.mjs";
 
 
@@ -60,6 +61,7 @@ export async function loginRequest(creds){
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(creds)
   };
+  console.log("trying login", options)
   const response = await fetch(`${baseURL}login`, options);
   const data = await convertToJson(response);
   
@@ -73,10 +75,24 @@ export async function loginRequest(creds){
   console.log("data.access_token:", data.access_token);
   console.log("==========================");
   
-  debugger; // This will pause execution so you can read the logs
+  // debugger; // This will pause execution so you can read the logs
   
   return data.accessToken;
 }
+
+export async function registerUser(registrationData){
+  const options = {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(registrationData)
+  };
+  
+  console.log("trying register", options)
+  const response = await fetch(`${baseURL}users`, options);
+  const data = await convertToJson(response);
+  return data;
+}
+
 
 export async function getOrders(token){
   const options = {
