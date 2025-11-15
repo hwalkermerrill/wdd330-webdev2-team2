@@ -25,9 +25,14 @@
       <h3 id="productName">Loading product name...</h3>
       <h2 class="divider" id="productNameWithoutBrand">Loading product details...</h2>
 
-      <img id="productImage" class="divider"
-        src="http://server-nodejs.cit.byui.edu:3000/images/sleepoutside/mystery-ranch-urban-assault-21l-backpack-in-lemon~p~28upm_08~320.jpg"
-        alt="Image of Mystery Ranch Urban Assault 21L Backpack">
+   <div class="product-image-carousel">
+    
+    <img id="productImage" class="divider" src="" alt="">
+    
+    <div id="thumbnailContainer" class="thumbnails">
+      <ul class="thumbnails"></ul>
+    </div>
+  </div>
 
       <!-- Price Block -->
       <div class="product_pricing">
@@ -42,6 +47,13 @@
       <div class="product-detail__add">
         <button id="addToCart" data-id="">Add to Cart</button>
       </div>
+    </section>
+
+    <section >
+      <h2 id="similarProductsTitle" class="divider">Similar Products</h2>
+
+      <ul id="similarProducts"></ul>
+    
     </section>
   </main>
 

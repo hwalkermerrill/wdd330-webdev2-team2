@@ -1,6 +1,8 @@
 import { setLocalStorage, getLocalStorage, alertMessage } from "./utils.mjs";
-import { findProductById } from "./externalServices.mjs";
+import { findProductById, getProductsByCategory} from "./externalServices.mjs";
 import { updateCartBadge } from "./cartBadge.js";
+
+
 
 document.addEventListener("DOMContentLoaded", updateCartBadge);
 
@@ -17,6 +19,7 @@ export default async function productDetails(productId) {
     }
 
     renderProductDetails();
+    similarProducts();
 
     // Add event listener for cart button
     const addBtn = document.getElementById("addToCart");
@@ -87,6 +90,7 @@ export function renderProductDetails() {
     if (discountElement) discountElement.style.display = "none";
     if (originalPriceElement) originalPriceElement.style.display = "none";
   }
+  renderThumbnails();
 
   // Some API descriptions are HTML-formatted — render safely
   document.getElementById("productDescriptionHtmlSimple").innerHTML =
@@ -122,6 +126,79 @@ export function loadBreadCrumbs() {
   });
 
   breadcrumbContainer.innerHTML = html;
+}
+
+export function renderThumbnails() {
+  const hasExtraImages = product.Images?.ExtraImages?.length > 0;
+  
+  if (!hasExtraImages) {
+    return;
+  }
+  
+  let allImages = [];
+  allImages.push(product.Images.PrimaryLarge);
+  
+  product.Images.ExtraImages.forEach(img => {
+    allImages.push(img.Src);
+  });
+  
+  const thumbnailContainer = document.getElementById("thumbnailContainer");
+  const ul = thumbnailContainer.querySelector("ul");
+  
+  ul.innerHTML = "";
+  
+  allImages.forEach((imageSrc, index) => {
+    const li = document.createElement("li");
+    const img = document.createElement("img");
+    img.src = imageSrc;
+    img.alt = `Thumbnail ${index + 1}`;
+    img.classList.add("thumbnail");
+    
+    img.addEventListener("click", () => {
+      document.getElementById("productImage").src = imageSrc;
+    });
+    
+    li.appendChild(img);
+    ul.appendChild(li);
+  });
+}
+
+export async function similarProducts() {
+
+  const similarProducts = await getProductsByCategory(product.CategoryId)
+
+  console.log("Similar products:", similarProducts);
+
+  const numberOfRecommendations = 3;
+  const picks = similarProducts.sort(() => 0.5 - Math.random()).slice(0, numberOfRecommendations);
+
+  const similarProductsContainer = document.getElementById("similarProducts");
+  similarProductsContainer.innerHTML = "";
+
+  
+
+
+  picks.forEach((product) => {
+    const productCard = document.createElement("div");
+
+    console.log(product);
+
+    productCard.random = Math.random(2);
+
+    productCard.innerHTML = `
+      <div class="product-card">
+        <a href="/product_pages/?product=${product.Id}">
+          <img src="${product.Images.PrimaryLarge}" alt="${product.Name}" loading="lazy">
+          <h3 class="card__brand">${product.Brand?.Name || "Unknown Brand"}</h3>
+          <h2 class="card__name">${product.NameWithoutBrand || product.Name}</h2>
+          <p class="product-card__price">$${product.FinalPrice}</p>
+        </a>
+      </div>
+    `;
+
+    
+    similarProductsContainer.appendChild(productCard);
+  });
 }
 
 loadBreadCrumbs();
