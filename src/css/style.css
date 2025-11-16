@@ -719,3 +719,22 @@ input {
 #similarProductsTitle{
   margin-left: 50px;
 }
+
+#login-button{
+  padding: 0.5rem 1rem;
+  font-size: 1em;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin: .75rem;
+  margin-right: 1rem;
+  margin-left: 1rem;
+}
+
+#login-button a {
+  text-decoration: none;
+  color: white;
+}
