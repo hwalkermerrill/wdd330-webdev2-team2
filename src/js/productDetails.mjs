@@ -2,8 +2,6 @@ import { setLocalStorage, getLocalStorage, alertMessage } from "./utils.mjs";
 import { findProductById, getProductsByCategory} from "./externalServices.mjs";
 import { updateCartBadge } from "./cartBadge.js";
 
-
-
 document.addEventListener("DOMContentLoaded", updateCartBadge);
 
 let product;
@@ -20,6 +18,7 @@ export default async function productDetails(productId) {
 
     renderProductDetails();
     similarProducts();
+    setupComments(product.Id);
 
     // Add event listener for cart button
     const addBtn = document.getElementById("addToCart");
@@ -198,6 +197,98 @@ export async function similarProducts() {
 
     
     similarProductsContainer.appendChild(productCard);
+  });
+}
+// =========================
+// COMMENTS SYSTEM WITH DELETE, RATING, AND SORT
+// =========================
+
+function setupComments(productId) {
+  const form = document.getElementById("commentForm");
+  const list = document.getElementById("commentList");
+  const sortSelect = document.getElementById("sortComments");
+
+  if (!form || !list || !sortSelect) return;
+
+  // Render comments initially
+  renderComments(productId);
+
+  // Add new comment
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const name = document.getElementById("commenterName").value.trim();
+    const text = document.getElementById("commentText").value.trim();
+    const rating = parseInt(document.getElementById("commentRating").value);
+
+    if (!name || !text || !rating) return;
+
+    const newComment = {
+      id: Date.now(), // unique ID for deletion
+      name,
+      text,
+      rating,
+      date: new Date().toISOString(),
+    };
+
+    const key = `comments-${productId}`;
+    const comments = getLocalStorage(key) || [];
+    comments.push(newComment);
+    setLocalStorage(key, comments);
+
+    form.reset();
+    renderComments(productId);
+  });
+
+  // Sorting
+  sortSelect.addEventListener("change", () => renderComments(productId));
+}
+
+function renderComments(productId) {
+  const list = document.getElementById("commentList");
+  const sortSelect = document.getElementById("sortComments");
+  if (!list) return;
+
+  const key = `comments-${productId}`;
+  let comments = getLocalStorage(key) || [];
+
+  // Sort logic
+  const sortBy = sortSelect?.value || "newest";
+  if (sortBy === "newest") {
+    comments.sort((a, b) => new Date(b.date) - new Date(a.date));
+  } else if (sortBy === "oldest") {
+    comments.sort((a, b) => new Date(a.date) - new Date(b.date));
+  } else if (sortBy === "highest") {
+    comments.sort((a, b) => b.rating - a.rating);
+  } else if (sortBy === "lowest") {
+    comments.sort((a, b) => a.rating - b.rating);
+  }
+
+  // Clear existing
+  list.innerHTML = "";
+
+  comments.forEach((c) => {
+    const li = document.createElement("li");
+    li.classList.add("comment-item");
+
+    li.innerHTML = `
+      <p>
+        <strong>${c.name}</strong>
+        <em>(${new Date(c.date).toLocaleDateString()})</em>
+        - ${"⭐️".repeat(c.rating)}
+      </p>
+      <p>${c.text}</p>
+      <button class="deleteComment" data-id="${c.id}">Delete</button>
+    `;
+
+    // Delete comment
+    li.querySelector(".deleteComment").addEventListener("click", () => {
+      const updatedComments = comments.filter((com) => com.id !== c.id);
+      setLocalStorage(key, updatedComments);
+      renderComments(productId);
+    });
+
+    list.appendChild(li);
   });
 }
 

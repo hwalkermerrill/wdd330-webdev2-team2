@@ -21,33 +21,75 @@
   <nav id="breadcrumb">hello</nav>
 
   <main class="divider">
-    <section class="product-detail">
+  <section class="product-detail">
       <h3 id="productName">Loading product name...</h3>
       <h2 class="divider" id="productNameWithoutBrand">Loading product details...</h2>
 
-   <div class="product-image-carousel">
+    <div class="product-image-carousel">
     
-    <img id="productImage" class="divider" src="" alt="">
+      <img id="productImage" class="divider" src="" alt="">
     
-    <div id="thumbnailContainer" class="thumbnails">
-      <ul class="thumbnails"></ul>
+      <div id="thumbnailContainer" class="thumbnails">
+        <ul class="thumbnails"></ul>
+      </div>
     </div>
-  </div>
 
       <!-- Price Block -->
-      <div class="product_pricing">
-        <p class="product-card__price--original" id="productOriginalPrice"></p>
-        <p class="product-card__discount" id="productDiscount"></p>
-        <p class="product-card__price" id="productFinalPrice"></p>
-      </div>
+    <div class="product_pricing">
+      <p class="product-card__price--original" id="productOriginalPrice"></p>
+      <p class="product-card__discount" id="productDiscount"></p>
+      <p class="product-card__price" id="productFinalPrice"></p>
+    </div>
 
       <p class="product__color" id="productColorName"></p>
       <p class="product__description" id="productDescriptionHtmlSimple"></p>
 
       <div class="product-detail__add">
-        <button id="addToCart" data-id="">Add to Cart</button>
+          <button id="addToCart" data-id="">Add to Cart</button>
       </div>
-    </section>
+  </section>
+  <!-- Product comment section-->
+  <section id="commentsSection">
+    <h3>Customer Reviews</h3>
+
+    <!-- Sort dropdown -->
+    <label for="sortComments">Sort by:</label>
+    <select id="sortComments">
+      <option value="newest">Newest</option>
+      <option value="oldest">Oldest</option>
+      <option value="highest">Highest Rating</option>
+      <option value="lowest">Lowest Rating</option>
+    </select>
+
+    <ul id="commentList"></ul>
+
+    <form id="commentForm">
+      <label>
+        Name:
+        <input type="text" id="commenterName" required />
+      </label>
+
+      <label>
+        Comment:
+        <textarea id="commentText" required></textarea>
+      </label>
+
+      <label>
+        Rating:
+        <select id="commentRating" required>
+          <option value="">Select rating</option>
+          <option value="5">⭐️⭐️⭐️⭐️⭐️</option>
+          <option value="4">⭐️⭐️⭐️⭐️</option>
+          <option value="3">⭐️⭐️⭐️</option>
+          <option value="2">⭐️⭐️</option>
+          <option value="1">⭐️</option>
+        </select>
+      </label>
+
+      <button type="submit">Add Comment</button>
+    </form>
+  </section>
+
 
     <section >
       <h2 id="similarProductsTitle" class="divider">Similar Products</h2>

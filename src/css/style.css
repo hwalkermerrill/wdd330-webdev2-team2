@@ -447,6 +447,57 @@ input {
 input {
   margin-bottom: 1em;
 }
+#commentsSection {
+  margin-top: 2rem;
+  padding: 1rem;
+  border-top: 1px solid #ddd;
+}
+
+#commentList {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 1rem;
+}
+
+.comment-item {
+  padding: 0.75rem;
+  border-bottom: 1px solid #eee;
+}
+
+#commentForm label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+#commentForm input,
+#commentForm textarea {
+  width: 100%;
+  margin-top: 0.25rem;
+  padding: 0.5rem;
+}
+.comment-item {
+  padding: 0.75rem;
+  border-bottom: 1px solid #eee;
+  position: relative;
+}
+
+.comment-item button.deleteComment {
+  background: #ff4d4f;
+  color: #fff;
+  border: none;
+  padding: 0.25rem 0.5rem;
+  cursor: pointer;
+  float: right;
+  border-radius: 3px;
+}
+
+.comment-item button.deleteComment:hover {
+  background: #e53935;
+}
+
+#sortComments {
+  margin-bottom: 1rem;
+}
 
 /* --Modal Styles -- */
 .modal-holder {
