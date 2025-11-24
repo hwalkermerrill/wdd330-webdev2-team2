@@ -56,7 +56,7 @@ export function addToCart() {
 
 export function renderProductDetails() {
   // Constants at the top
-  const imageSrc = product.Images?.PrimaryLarge || "images/default-image.jpg";
+
   const colorName = product.Colors?.[0]?.ColorName || "N/A";
   const discountElement = document.getElementById("productDiscount");
   const originalPriceElement = document.getElementById("productOriginalPrice")
@@ -64,8 +64,26 @@ export function renderProductDetails() {
   document.getElementById("productName").textContent = product.Name;
   document.getElementById("productNameWithoutBrand").textContent =
     product.NameWithoutBrand || product.Name;
-  document.getElementById("productImage").src = imageSrc;
-  document.getElementById("productImage").alt = `Image of ${product.Name}`;
+  
+  const productImg = document.getElementById("productImage");
+
+// Fallback for missing images
+const primaryLarge = product.Images?.PrimaryLarge || "images/default-image.jpg";
+const primaryMedium = product.Images?.PrimaryMedium || primaryLarge;
+const primarySmall = product.Images?.PrimarySmall || primaryMedium;
+
+productImg.src = primaryLarge;
+productImg.alt = `Image of ${product.Name}`;
+
+// Responsive images
+productImg.srcset = `
+  ${primarySmall} 480w,
+  ${primaryMedium} 768w,
+  ${primaryLarge} 1200w
+`;
+
+productImg.sizes = "(max-width: 480px) 480px, (max-width: 768px) 768px, 1200px";
+
   document.getElementById("productFinalPrice").textContent = `$${product.FinalPrice}`;
   document.getElementById("productColorName").textContent = colorName;
 
@@ -199,9 +217,8 @@ export async function similarProducts() {
     similarProductsContainer.appendChild(productCard);
   });
 }
-// =========================
+
 // COMMENTS SYSTEM WITH DELETE, RATING, AND SORT
-// =========================
 
 function setupComments(productId) {
   const form = document.getElementById("commentForm");
